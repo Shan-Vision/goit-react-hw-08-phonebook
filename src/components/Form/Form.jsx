@@ -1,47 +1,8 @@
-import { useState } from 'react';
-// import PropTypes from 'prop-types';
 import { Form, Label, Input, Button } from './Form.styled';
-
 import { useAddContactMutation } from 'redux/contactsSlice';
 
 const ContactForm = () => {
-  // const [name, setName] = useState('');
-  // const [number, setNumber] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [country, setCountry] = useState('');
-  // const [avatar, setAvatar] = useState('');
-
-  const [addContact, { data, isUninitialized, isSuccess, isLoading }] =
-    useAddContactMutation();
-
-  // console.log('data :>> ', data);
-  // console.log('isUninitialized :>> ', isUninitialized);
-  // console.log('isSuccess :>> ', isSuccess);
-  // console.log('isLoading :>> ', isLoading);
-
-  // const handleNameChange = event => {
-  //   console.log(event.target);
-  //   const { value, name } = event.target;
-  //   switch (name) {
-  //     case 'name':
-  //       setName(value);
-  //       break;
-  //     case 'number':
-  //       setNumber(value);
-  //       break;
-  //     case 'country':
-  //       setCountry(value);
-  //       break;
-  //     case 'email':
-  //       setEmail(value);
-  //       break;
-  //     case 'avatar':
-  //       setAvatar(value);
-  //       break;
-  //     default:
-  //       return;
-  //   }
-  // };
+  const [addContact] = useAddContactMutation();
 
   const handleSubmit = evt => {
     evt.preventDefault();
@@ -51,15 +12,6 @@ const ContactForm = () => {
     const email = form.email.value;
     addContact({ name, email, phone });
     evt.target.reset();
-    // try {
-    //   addContact(name, number, email).unwrap();
-    // } catch (error) {
-    //   console.log(error);
-    // }
-
-    // const findIncludeName = !contactList.filter(
-    //   contact => contact.toLowerCase() === name.toLowerCase()
-    // ).length;
 
     // if (findIncludeName) {
     //   dispatch(addContact({ id: shortid.generate(), name, number, country }));
@@ -68,14 +20,6 @@ const ContactForm = () => {
     //   alert(`${name} is already in contacts`);
     // }
   };
-
-  // const resetForm = () => {
-  //   setName('');
-  //   setNumber('');
-  //   setEmail('');
-  //   setCountry('');
-
-  // };
 
   return (
     <Form onSubmit={handleSubmit}>
