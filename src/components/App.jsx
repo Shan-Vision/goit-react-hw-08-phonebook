@@ -1,10 +1,11 @@
-// import { useEffect } from 'react';
-
 import ContactForm from 'components/Form';
 import ContactList from 'components/ContactList';
-import FilterContacts from 'components/FilterContacts';
+// import FilterContacts from 'components/FilterContacts';
+import { useGetContactsQuery } from 'redux/contactsSlice';
 
 const App = () => {
+  const { isSuccess } = useGetContactsQuery();
+
   return (
     <div
       style={{
@@ -20,8 +21,8 @@ const App = () => {
       <h1>Phonebook</h1>
       <ContactForm />
       <h2>Contacts</h2>
-      <FilterContacts />
-      <ContactList />
+      {/* <FilterContacts /> */}
+      {isSuccess && <ContactList />}
     </div>
   );
 };

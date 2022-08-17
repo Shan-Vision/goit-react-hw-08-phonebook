@@ -1,22 +1,27 @@
-import { Item, ItemButton } from './ContactItem.styled';
+import { Item, ItemButton, ContactInfo, SideInfo } from './ContactItem.styled';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import { removeContact } from 'redux/contactsSlice';
+import { useDeleteContactMutation } from 'redux/contactsSlice';
 
-function ContactItem({ id, name, number }) {
-  const dispatch = useDispatch();
+function ContactItem({ id, name, phone, email }) {
+  const [deleteContact] = useDeleteContactMutation();
   return (
     <Item>
-      <span>{name}:</span>
-      <span>{number}</span>
-      <ItemButton
-        type="button"
-        onClick={() => {
-          dispatch(removeContact(id));
-        }}
-      >
-        delete
-      </ItemButton>
+      <ContactInfo>
+        <p>
+          Name: <b>{name}</b>
+        </p>
+        <p>
+          Phone: <b>{phone}</b>
+        </p>
+        <p>
+          Email: <b>{email}</b>
+        </p>
+      </ContactInfo>
+      <SideInfo>
+        <ItemButton type="button" onClick={() => deleteContact(id)}>
+          delete
+        </ItemButton>
+      </SideInfo>
     </Item>
   );
 }
@@ -24,6 +29,7 @@ function ContactItem({ id, name, number }) {
 ContactItem.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  number: PropTypes.string.isRequired,
+  phone: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
 };
 export default ContactItem;
