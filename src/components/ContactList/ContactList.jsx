@@ -8,12 +8,12 @@ function ContactList() {
     <>
       {isSuccess && (
         <List>
-          {data.map(({ id, name, phone, email }) => (
+          {data.map(({ id, name, number, email }) => (
             <ContactItem
               key={id}
               id={id}
               name={name}
-              phone={phone}
+              number={number}
               email={email}
             />
           ))}

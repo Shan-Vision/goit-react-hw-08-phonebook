@@ -1,13 +1,13 @@
 import { FilterBox, FilterLabel, FilterInput } from './FilterContacts.styled';
-import { useDispatch } from 'react-redux';
-import { filterByName } from 'redux/contactsSlice';
+// import { useDispatch } from 'react-redux';
+import { useFindContactByNameMutation } from 'redux/contactsSlice';
 
 function FilterContacts() {
-  const dispatch = useDispatch();
+  const [findContactByName, { data }] = useFindContactByNameMutation();
 
   const onChange = event => {
     const value = event.target.value;
-    dispatch(filterByName(value));
+    findContactByName(value);
   };
 
   return (

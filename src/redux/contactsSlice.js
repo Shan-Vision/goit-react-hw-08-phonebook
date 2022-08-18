@@ -1,13 +1,6 @@
 // import { createSlice } from '@reduxjs/toolkit';
-import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const persistConfig = {
-  key: 'contacts',
-  storage,
-  whitelist: ['items'],
-};
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const contactsApi = createApi({
   reducerPath: 'contactsApi',
@@ -17,22 +10,15 @@ export const contactsApi = createApi({
   tagTypes: ['Contacts'],
   endpoints: builder => ({
     getContacts: builder.query({
-      query: () => `contacts/`,
+      query: () => `/contacts/`,
       providesTags: ['Contacts'],
     }),
     addContact: builder.mutation({
-      query(newContact) {
-        const { name, email, phone } = newContact;
-        return {
-          url: `contacts/`,
-          method: 'POST',
-          body: {
-            name,
-            phone,
-            email,
-          },
-        };
-      },
+      query: newContact => ({
+        url: `/contacts/`,
+        method: 'POST',
+        body: newContact,
+      }),
       invalidatesTags: ['Contacts'],
     }),
     deleteContact: builder.mutation({
@@ -41,6 +27,13 @@ export const contactsApi = createApi({
           url: `/contacts/${id}`,
           method: 'DELETE',
         };
+      },
+      invalidatesTags: ['Contacts'],
+    }),
+    findContactByName: builder.mutation({
+      query: contactName => {
+        console.log('contactName :>> ', contactName);
+        return `contacts/${contactName}`;
       },
       invalidatesTags: ['Contacts'],
     }),
@@ -53,9 +46,5 @@ export const {
   useGetContactsQuery,
   useAddContactMutation,
   useDeleteContactMutation,
+  useFindContactByNameMutation,
 } = contactsApi;
-
-export const persistedReducer = persistReducer(
-  persistConfig,
-  contactsApi.reducer
-);

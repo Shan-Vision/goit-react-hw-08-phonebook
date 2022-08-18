@@ -2,7 +2,7 @@ import { Item, ItemButton, ContactInfo, SideInfo } from './ContactItem.styled';
 import PropTypes from 'prop-types';
 import { useDeleteContactMutation } from 'redux/contactsSlice';
 
-function ContactItem({ id, name, phone, email }) {
+function ContactItem({ id, name, number, email }) {
   const [deleteContact] = useDeleteContactMutation();
   return (
     <Item>
@@ -11,7 +11,7 @@ function ContactItem({ id, name, phone, email }) {
           Name: <b>{name}</b>
         </p>
         <p>
-          Phone: <b>{phone}</b>
+          Phone: <b>{number}</b>
         </p>
         <p>
           Email: <b>{email}</b>
@@ -29,7 +29,7 @@ function ContactItem({ id, name, phone, email }) {
 ContactItem.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  phone: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
 };
 export default ContactItem;
