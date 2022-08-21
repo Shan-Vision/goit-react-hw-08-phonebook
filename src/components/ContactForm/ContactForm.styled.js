@@ -3,37 +3,42 @@ import { Form, Field } from 'formik';
 
 export const FormStyle = styled(Form)`
   width: 400px;
-  padding: 14px 16px;
   display: flex;
   flex-direction: column;
   gap: 14px;
-  border: 1px solid black;
   border-radius: 4px;
-`;
-export const Label = styled.label`
-  font-size: 20px;
-  font-weight: 500;
 `;
 export const Input = styled(Field)`
   display: inline-block;
-  width: 250px;
+  width: 100%;
   height: 40px;
+  padding: 4px 8px;
   border-radius: 4px;
   outline: none;
-  border: 2px solid black;
+  border: 1px solid grey;
   font-size: 16px;
   font-family: inherit;
   :hover,
   :focus {
     border: 2px solid #719ece;
+    box-shadow: 0 0 5pt 0.5pt #999;
   }
 `;
+
+export const ButtonBox = styled.div`
+  display: flex;
+  gap: 10px;
+`;
 export const Button = styled.button`
-  cursor: pointer;
-  width: 120px;
   height: 40px;
   border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
   border: none;
   color: white;
-  background-color: rgba(245, 68, 59, 1);
+  background-color: #219df3;
+  &:nth-child(2) {
+    background-color: #eb3941;
+  }
 `;

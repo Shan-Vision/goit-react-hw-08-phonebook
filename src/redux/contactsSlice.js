@@ -1,17 +1,15 @@
-// import { createSlice } from '@reduxjs/toolkit';
-
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const contactsApi = createApi({
-  reducerPath: 'contactsApi',
+  reducerPath: 'contacts',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://62fab4f03c4f110faa9e6d48.mockapi.io/api/v1/',
   }),
-  tagTypes: ['Contacts'],
+  tagTypes: ['Contact'],
   endpoints: builder => ({
     getContacts: builder.query({
       query: () => `/contacts/`,
-      providesTags: ['Contacts'],
+      providesTags: ['Contact'],
     }),
     addContact: builder.mutation({
       query: newContact => ({
@@ -19,7 +17,7 @@ export const contactsApi = createApi({
         method: 'POST',
         body: newContact,
       }),
-      invalidatesTags: ['Contacts'],
+      invalidatesTags: ['Contact'],
     }),
     deleteContact: builder.mutation({
       query(id) {
@@ -28,14 +26,7 @@ export const contactsApi = createApi({
           method: 'DELETE',
         };
       },
-      invalidatesTags: ['Contacts'],
-    }),
-    findContactByName: builder.mutation({
-      query: contactName => {
-        console.log('contactName :>> ', contactName);
-        return `contacts/${contactName}`;
-      },
-      invalidatesTags: ['Contacts'],
+      invalidatesTags: ['Contact'],
     }),
   }),
 });
@@ -46,5 +37,4 @@ export const {
   useGetContactsQuery,
   useAddContactMutation,
   useDeleteContactMutation,
-  useFindContactByNameMutation,
 } = contactsApi;

@@ -1,21 +1,25 @@
-import { FilterBox, FilterLabel, FilterInput } from './FilterContacts.styled';
-// import { useDispatch } from 'react-redux';
-import { useFindContactByNameMutation } from 'redux/contactsSlice';
+import { FilterBox, FilterInput } from './FilterContacts.styled';
+import { useDispatch, useSelector } from 'react-redux';
+import { getFilterContact, setFilterContact } from 'redux/filtereSlice';
 
-function FilterContacts() {
-  const [findContactByName, { data }] = useFindContactByNameMutation();
+const FilterContacts = () => {
+  const dispatch = useDispatch();
+  const filter = useSelector(getFilterContact);
 
-  const onChange = event => {
+  const handleChange = event => {
     const value = event.target.value;
-    findContactByName(value);
+    dispatch(setFilterContact(value));
   };
 
   return (
     <FilterBox>
-      <FilterLabel>Find contacts by name</FilterLabel>
-      <FilterInput onChange={onChange} />
+      <FilterInput
+        onChange={handleChange}
+        value={filter}
+        placeholder="Search Name"
+      />
     </FilterBox>
   );
-}
+};
 
 export default FilterContacts;

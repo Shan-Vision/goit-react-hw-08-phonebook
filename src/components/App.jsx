@@ -1,29 +1,24 @@
 import { Toaster } from 'react-hot-toast';
-import ContactForm from 'components/Form';
+import ContactForm from 'components/ContactForm';
 import ContactList from 'components/ContactList';
 import FilterContacts from 'components/FilterContacts';
+import Header from './Header';
 import { useGetContactsQuery } from 'redux/contactsSlice';
+import { AppContainer,MainContent, ContentBox } from './App.styled';
 
 const App = () => {
   const { isSuccess } = useGetContactsQuery();
 
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 20,
-        color: '#010101',
-      }}
-    >
-      <h1>Phonebook</h1>
-      <ContactForm />
-      <h2>Contacts</h2>
-      <FilterContacts />
-      {isSuccess && <ContactList />}
+    <AppContainer>
+      <Header />
+      <MainContent>
+        <ContactForm />
+        <ContentBox>
+          <FilterContacts />
+          {isSuccess && <ContactList />}
+        </ContentBox>
+      </MainContent>
       <Toaster
         position="top-center"
         toastOptions={{
@@ -35,7 +30,7 @@ const App = () => {
           },
         }}
       />
-    </div>
+    </AppContainer>
   );
 };
 
