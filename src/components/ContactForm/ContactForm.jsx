@@ -77,8 +77,7 @@ const ContactForm = () => {
     const NameList = contacts.map(contact => contact.name.toLowerCase());
     const findIncludeName = name => {
       if (NameList.includes(name.toLowerCase())) {
-        toast.error(`${name} is already in contacts`);
-        return true;
+        return toast.error(`${name} is already in contacts`);
       }
     };
 
@@ -91,20 +90,19 @@ const ContactForm = () => {
         number,
         email,
       };
+
       if (submitAction === 'primary') {
-        console.log(newContact.name);
         await addContact(newContact);
         resetForm();
         toast.success(`New contacts has been successfully added`);
         return;
       }
       if (submitAction === 'secondary') {
-        resetForm({ name: '', number: '', email: '' });
         toast.success(`Reset was succeessfully completed`);
+        resetForm({ name: '', number: '', email: '' });
         return;
       }
     } catch (error) {
-      toast.error(error.message);
       console.log(error);
     }
   };
@@ -151,7 +149,6 @@ const ContactForm = () => {
               type="submit"
               onClick={() => {
                 submitAction = 'primary';
-                handleSubmit();
               }}
             >
               <MdDone style={style} />
@@ -159,12 +156,11 @@ const ContactForm = () => {
             </Button>
             {showResetButton && (
               <Button
-                type="button"
+                type="submit"
                 variant="contained"
                 color="secondary"
                 onClick={() => {
                   submitAction = 'secondary';
-                  handleSubmit();
                 }}
               >
                 <MdRemoveCircleOutline style={style} />
