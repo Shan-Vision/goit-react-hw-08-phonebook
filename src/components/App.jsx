@@ -1,36 +1,59 @@
-import { Toaster } from 'react-hot-toast';
-import ContactForm from 'components/ContactForm';
-import ContactList from 'components/ContactList';
-import FilterContacts from 'components/FilterContacts';
-import Header from './Header';
-import { useGetContactsQuery } from 'redux/contactsSlice';
-import { AppContainer,MainContent, ContentBox } from './App.styled';
+import { useEffect, lazy } from 'react';
+import { useDispatch } from 'react-redux';
+import { authOperations } from 'redux/user';
+import { Route, Routes } from 'react-router-dom';
+import { Layout } from './Layout';
+import PrivateRoute from './Routes/PrivateRoute';
+import PublicRoute from './Routes/PublicRoute';
+import { useAuth } from 'hooks/useAuth';
+
+const HomeView = lazy(() => import('./views/HomeView/HomeView'));
+const ContactsView = lazy(() => import('./views/ContactsView/ContactsView'));
+const RegisterView = lazy(() => import('./views/RegisterView/RegisterView'));
+const LoginView = lazy(() => import('./views/LoginView/LoginView'));
 
 const App = () => {
-  const { isSuccess } = useGetContactsQuery();
+  const dispatch = useDispatch();
+  const isRefreshing = useAuth();
 
-  return (
-    <AppContainer>
-      <Header />
-      <MainContent>
-        <ContactForm />
-        <ContentBox>
-          <FilterContacts />
-          {isSuccess && <ContactList />}
-        </ContentBox>
-      </MainContent>
-      <Toaster
-        position="top-center"
-        toastOptions={{
-          duration: 2000,
-          style: {
-            background: '#363636',
-            color: '#fff',
-            padding: '12px',
-          },
-        }}
-      />
-    </AppContainer>
+  useEffect(() => {
+    dispatch(authOperations.fetchCurrentUser());
+  }, [dispatch]);
+
+  return !isRefreshing ? (
+    <h1>Refreshing User...</h1>
+  ) : (
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<PublicRoute component={<HomeView />} />} />
+        <Route
+          path="/register"
+          element={
+            <PublicRoute
+              redirectTo="/contacts"
+              restricted
+              component={<RegisterView />}
+            />
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <PublicRoute
+              redirectTo="/contacts"
+              restricted
+              component={<LoginView />}
+            />
+          }
+        />
+        <Route
+          path="/contacts"
+          element={
+            <PrivateRoute redirectTo="/login" component={<ContactsView />} />
+          }
+        />
+      </Route>
+    </Routes>
   );
 };
 

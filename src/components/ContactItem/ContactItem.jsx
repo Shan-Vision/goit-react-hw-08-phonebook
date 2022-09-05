@@ -1,22 +1,19 @@
 import { BodyRowTitle, BodyRow } from './ContactItem.styled';
 import PropTypes from 'prop-types';
-import { IoPerson, IoMailSharp, IoPhonePortrait } from 'react-icons/io5';
+import { IoPerson, IoPhonePortrait } from 'react-icons/io5';
 import { RiDeleteBin6Fill } from 'react-icons/ri';
-import { useDeleteContactMutation } from 'redux/contactsSlice';
+import { deleteContact } from 'redux/contacts/contacts-operations';
 import IconButton from 'components/IconButton';
 import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
 
-const ContactItem = ({ values: { id, name, number, email } }) => {
-  const [deleteContact, { isLoading }] = useDeleteContactMutation();
+const ContactItem = ({ values: { id, name, number } }) => {
+  const dispatch = useDispatch();
   return (
     <BodyRow>
       <BodyRowTitle>
         <IoPerson style={{ marginRight: '6px' }} />
         {name}
-      </BodyRowTitle>
-      <BodyRowTitle>
-        <IoMailSharp style={{ marginRight: '6px' }} />
-        {email}
       </BodyRowTitle>
       <BodyRowTitle>
         <IoPhonePortrait style={{ marginRight: '6px' }} />
@@ -25,10 +22,9 @@ const ContactItem = ({ values: { id, name, number, email } }) => {
       <BodyRowTitle>
         <IconButton
           onClick={() => {
-            deleteContact(id);
+            dispatch(deleteContact(id));
             toast.success('Contact was successfully deleted');
           }}
-          disabled={isLoading}
         >
           <RiDeleteBin6Fill size={22} />
         </IconButton>
@@ -42,7 +38,6 @@ ContactItem.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     number: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
   }).isRequired,
 };
 export default ContactItem;

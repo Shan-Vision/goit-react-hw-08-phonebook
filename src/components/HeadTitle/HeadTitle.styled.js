@@ -5,7 +5,13 @@ export const Caption = styled.p`
 `;
 export const Title = styled.h1`
   margin-bottom: 14px;
+  color: #ccc;
 `;
 export const HeadContainer = styled.div`
-  margin-bottom: 60px;
+  display: flex;
+  margin-bottom: 20px;
+`;
+export const Line = styled.hr`
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
 `;
