@@ -1,4 +1,4 @@
-import { Caption, Title, HeadContainer, Span } from './HomeView.styled';
+import { Caption, Title, HeadContainer } from './HomeView.styled';
 
 export const HomeView = () => {
   return (
