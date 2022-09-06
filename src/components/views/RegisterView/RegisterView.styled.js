@@ -24,6 +24,10 @@ export const Input = styled(Field)`
     box-shadow: 0 0 5pt 0.5pt #999;
   }
 `;
+export const ButtonBox = styled.div`
+  display: flex;
+  gap: 10px;
+`;
 export const Button = styled.button`
   margin: 0 auto;
   width: 50%;
@@ -36,4 +40,7 @@ export const Button = styled.button`
   border: none;
   color: white;
   background-color: #219df3;
+  &:nth-child(2) {
+    background-color: #eb3941;
+  }
 `;

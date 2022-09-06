@@ -8,7 +8,7 @@ import styled from 'styled-components';
 const Containter = styled.div`
   display: flex;
   justify-content: center;
-  align-items: baseline;
+  align-items: center;
 `;
 
 export default function UserMenu() {
@@ -17,13 +17,13 @@ export default function UserMenu() {
 
   return (
     <Containter>
-      <span>{!user.user ? 'UserName' : user.user}</span>
+      <h3>{!user.user ? 'UserName' : user.user}</h3>
       <IconButton
         onClick={() => {
           dispatch(authOperations.logOut());
         }}
       >
-        <GrLogout size="17px" />
+        <GrLogout size={20} color="#fff" />
       </IconButton>
     </Containter>
   );
