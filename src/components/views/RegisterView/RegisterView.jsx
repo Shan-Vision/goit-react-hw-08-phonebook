@@ -6,8 +6,6 @@ import { useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
 import { MdRemoveCircleOutline, MdLogin } from 'react-icons/md';
 import { Box } from 'components/Box';
-import { useEffect } from 'react';
-import { useRef } from 'react';
 
 const schema = yup.object().shape({
   name: yup
@@ -75,12 +73,7 @@ const RegisterView = () => {
   return (
     <main>
       <div>
-        <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          pt={40}
-        >
+        <Box display="flex" justifyContent="center" alignItems="center" pt={40}>
           <Formik
             initialValues={initialValues}
             validationSchema={schema}
