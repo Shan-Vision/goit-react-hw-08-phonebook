@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 export const HeadContainer = styled.div`
   display: flex;
@@ -19,4 +20,21 @@ export const Caption = styled.p`
 export const Line = styled.hr`
   border: 1px solid #ccc;
   margin-bottom: 20px;
+`;
+
+export const ButtonBox = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+export const StyledNavLink = styled(NavLink)`
+  width: 150px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  border: none;
+  color: white;
+  background-color: #219df3;
 `;

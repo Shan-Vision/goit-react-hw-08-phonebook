@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
 import { MdRemoveCircleOutline, MdLogin } from 'react-icons/md';
 import { Box } from 'components/Box';
+import { useEffect } from 'react';
+import { useRef } from 'react';
 
 const schema = yup.object().shape({
   name: yup
@@ -72,69 +74,76 @@ const RegisterView = () => {
 
   return (
     <main>
-      <Box display="flex" justifyContent="center" alignItems="center" pt={40}>
-        <Formik
-          initialValues={initialValues}
-          validationSchema={schema}
-          onSubmit={handleSubmit}
+      <div>
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          pt={40}
         >
-          {({ handleChange, values: { name, email, password } }) => (
-            <FormStyle>
-              <MyTextField
-                type="text"
-                name="name"
-                value={name}
-                onChange={handleChange}
-                placeholder="Name"
-              />
-              <FormError name="name" component="div" />
-              <MyTextField
-                type="text"
-                name="email"
-                value={email}
-                onChange={handleChange}
-                placeholder="Email"
-              />
-              <FormError name="email" component="div" />
+          <Formik
+            initialValues={initialValues}
+            validationSchema={schema}
+            onSubmit={handleSubmit}
+          >
+            {({ handleChange, values: { name, email, password } }) => (
+              <FormStyle>
+                <MyTextField
+                  type="text"
+                  name="name"
+                  value={name}
+                  onChange={handleChange}
+                  placeholder="Name"
+                />
+                <FormError name="name" component="div" />
+                <MyTextField
+                  type="text"
+                  name="email"
+                  value={email}
+                  onChange={handleChange}
+                  placeholder="Email"
+                />
+                <FormError name="email" component="div" />
 
-              <MyTextField
-                autoComplete="true"
-                type="password"
-                name="password"
-                value={password}
-                onChange={handleChange}
-                placeholder="Password"
-              />
-              <FormError name="password" component="div" />
+                <MyTextField
+                  autoComplete="true"
+                  type="password"
+                  name="password"
+                  value={password}
+                  onChange={handleChange}
+                  placeholder="Password"
+                />
+                <FormError name="password" component="div" />
 
-              <ButtonBox>
-                <Button
-                  type="submit"
-                  onClick={() => {
-                    submitAction = 'signup';
-                  }}
-                >
-                  <MdLogin style={style} />
-                  Sign up
-                </Button>
-                {showResetButton && (
+                <ButtonBox>
                   <Button
                     type="submit"
-                    variant="contained"
-                    color="secondary"
                     onClick={() => {
-                      submitAction = 'reset';
+                      submitAction = 'signup';
                     }}
                   >
-                    <MdRemoveCircleOutline style={style} />
-                    Reset
+                    <MdLogin style={style} />
+                    Sign up
                   </Button>
-                )}
-              </ButtonBox>
-            </FormStyle>
-          )}
-        </Formik>
-      </Box>
+                  {showResetButton && (
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="secondary"
+                      onClick={() => {
+                        submitAction = 'reset';
+                      }}
+                    >
+                      <MdRemoveCircleOutline style={style} />
+                      Reset
+                    </Button>
+                  )}
+                </ButtonBox>
+              </FormStyle>
+            )}
+          </Formik>
+        </Box>
+      </div>
     </main>
   );
 };

@@ -1,4 +1,10 @@
-import { Caption, Title, HeadContainer } from './HomeView.styled';
+import {
+  Caption,
+  Title,
+  HeadContainer,
+  StyledNavLink,
+  ButtonBox,
+} from './HomeView.styled';
 
 export const HomeView = () => {
   return (
@@ -12,6 +18,10 @@ export const HomeView = () => {
         </div>
       </HeadContainer>
       {/* <Line /> */}
+      <ButtonBox>
+        <StyledNavLink to="/register">Sign Up</StyledNavLink>
+        <StyledNavLink to="/login">Login</StyledNavLink>
+      </ButtonBox>
     </>
   );
 };

@@ -20,8 +20,11 @@ export const Navigation = () => {
 
   return (
     <nav>
-      <Link to="/">Home</Link>
-      {isLoggedIn && <Link to="/contacts">Contacts</Link>}
+      {isLoggedIn ? (
+        <Link to="/contacts">Contacts</Link>
+      ) : (
+        <Link to="/">Home</Link>
+      )}
     </nav>
   );
 };
